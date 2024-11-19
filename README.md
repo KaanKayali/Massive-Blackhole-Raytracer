@@ -22,30 +22,29 @@ The disk around the black hole appears bent because the black hole's gravity is 
 ## Generating an image of a blackhole
 
 ### The Raycasting Mechanism
-Shooting Rays: The program "shoots" countless rays at the speed of light from the observer's point of view. These rays travel through the simulated space toward a black hole and its surrounding accretion disk.
+ - The program "shoots" countless rays at the speed of light from the observer's point of view. These rays travel through the simulated space toward a black hole and its surrounding accretion disk.
+ - Each ray is recalculated after each movement, based on where and at what angle it is to the black hole.
+ - Each ray eventually "lands" on something.
 
-Interaction with the Black Hole: As the rays travel, they are influenced by the immense gravitational pull of the black hole, which bends their paths. This bending of light, known as gravitational lensing, is a fundamental effect of the black hole's warped spacetime.
-
-Collision Detection: Each ray eventually "lands" on something:
-
-The Black Hole: Rays that fall into the black hole’s event horizon are lost forever and return no color, representing the absolute darkness at the center.
-The Accretion Disk: Rays hitting the glowing, swirling matter around the black hole return a specific color based on where they land. The accretion disk emits light due to the intense heat from friction and gravitational energy.
-Background Light: Rays passing near the black hole without directly hitting it may capture light bent from objects behind it, creating the warped appearance of the surrounding space.
+#### The Black Hole:
+Rays that fall into the black hole’s event horizon are lost forever and return no color, representing the absolute darkness at the center.
+#### The Accretion Disk: 
+Rays hitting the glowing, swirling matter around the black hole return a specific color based on where they land. The accretion disk emits light due to the intense heat from friction and gravitational energy.
+#### Background Light: 
+Rays passing near the black hole without directly hitting it may capture light bent from objects behind it, creating the warped appearance of the surrounding space.
 Generating the Visual
-Color Assignment: The color of each ray is determined based on where it interacts. For example:
+#### Color Assignment: 
+The color of each ray is determined based on where it interacts. For example:
 
-Rays landing on the black hole's shadow (event horizon) are black.
-Rays hitting the accretion disk return colors based on the disk’s properties (temperature, material composition, or light frequency).
-Rays bending around the black hole return colors from distorted background stars or the accretion disk, contributing to the halo-like ring.
-Rendering the Scene: Once all rays are traced, the colors they return are mapped to a 2D image, representing the observer’s view of the black hole. This produces the familiar appearance of:
+- Rays landing on the black hole's shadow (event horizon) are black.
+- Rays hitting the accretion disk return colors based on the disk’s properties (temperature, material composition, or light frequency).
+- Rays bending around the black hole return colors from distorted background stars or the accretion disk, contributing to the halo-like ring.
 
-A dark central shadow (the event horizon).
-A glowing ring around it (the accretion disk), warped by gravitational lensing.
-Additional distortions showing light from the background or other features.
-Why This Works
-The simulation works because of how light behaves near a black hole:
+#### Rendering the Scene: 
+Once all rays are traced, the colors they return are mapped to a 2D image, representing the observer’s view of the black hole. This produces the familiar appearance of:
 
-Gravitational Lensing: The black hole’s gravity bends the path of light, causing objects behind it to appear distorted or duplicated.
-Relativistic Effects: The light from the accretion disk changes in color and brightness due to the extreme speeds of the orbiting material and the black hole's gravity.
-Observing the Black Hole
-This simulation enables us to "see" a black hole, which is otherwise invisible. By tracing how light interacts with the black hole's surroundings, the program recreates its visual signature, including the strikingly warped space and glowing disk.
+- A dark central shadow (the event horizon).
+- A glowing ring around it (the accretion disk), warped by gravitational lensing.
+
+Image.
+
