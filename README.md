@@ -48,3 +48,83 @@ Once all rays are traced, the colors they return are mapped to a 2D image, repre
 
 Image.
 
+## Code in GameMaker
+
+The provided code is divided into three parts: `CreateEvent.gml`, `StepEvent.gml`, and `DrawEvent.gml`. Each of these handles specific aspects of the simulation.
+The `DestroyEvent.gml` is responsible for cleaning up the drawSurface (used for rendering the simulation) if it exists, in order to release memory.
+
+### **1. CreateEvent.gml**
+This script initializes the variables, sets up the environment, and prepares the raycasts and stars.
+
+#### Key Components:
+- **Scene Setup:**
+  - The black hole is positioned at the center with a specific radius (`blackholeradius`), surrounded by an accretion disk with defined inner and outer radii.
+  - A 3D-like space is defined using `windowWidth`, `windowHeight`, and `windowDepth`.
+
+- **Raycasts Initialization:**
+  - Depending on the perspective (`orthogonal` or perspective view), rays are generated.
+  - In **perspective mode**, rays originate from the center and point outward, mimicking an observer's view.
+
+- **Stars:**
+  - A number of stars (`staramount`) are randomly distributed in the background for aesthetic and simulation purposes.
+
+---
+
+### **2. StepEvent.gml**
+This script computes how the rays interact with the black hole and its accretion disk.
+
+#### Key Components:
+- **Ray Propagation:**
+  - Each ray moves forward based on its direction vector.
+  - If a ray comes close to the black hole, it is influenced by gravitational forces. The gravitational pull is calculated as:
+    $$\[
+    F = \frac{\text{grav}}{\text{distance to black hole}}
+    \]$$
+
+    The force components (`fx`, `fy`, `fz`) alter the ray's direction.
+
+- **Collision Detection:**
+  - Rays are checked for:
+    1. **Collision with the black hole** (inside the event horizon).
+    2. **Collision with the accretion disk** (within its boundaries).
+    3. **Exceeding a predefined limit in the scene.**
+
+- **Color Assignment:**
+  - Rays hitting:
+    - **Black Hole:** Assigned `blackholeColor` (pure black).
+    - **Accretion Disk:** Assigned `innerDiscColor` or `outerDiscColor` depending on proximity to the disk's edge.
+  - The `raycastsToDraw` array records the position and color of rays that are ready to be rendered.
+
+- **Ray Movement:**
+  - Rays that haven't finished their journey continue moving based on their normalized direction vectors.
+
+---
+
+### **3. DrawEvent.gml**
+This script renders the scene onto the screen, displaying the black hole, accretion disk, and stars.
+
+#### Key Components:
+- **Drawing Stars:**
+  - Stars are drawn as points using the `starColor`.
+
+- **Rendering Rays:**
+  - Each completed ray in `raycastsToDraw` is rendered as a pixel (or block) on the screen, with the color determined by where it landed (black hole, accretion disk, or background).
+
+- **Surface for Optimization:**
+  - A drawing surface is used to efficiently render the simulation frame by frame.
+
+---
+
+### **How It Works:**
+1. **Simulation Space:** Rays are initialized in a 3D space and assigned directions depending on the perspective.
+2. **Gravitational Bending:** As rays approach the black hole, their paths bend due to gravitational forces.
+3. **Collision and Coloring:**
+   - Rays that fall into the event horizon are marked as black.
+   - Rays hitting the accretion disk are colored based on their position.
+   - Rays that don't collide are left uncolored.
+4. **Rendering:**
+   - The processed ray data (`raycastsToDraw`) is used to draw the final image on the screen.
+
+---
+
+This implementation provides a simplified but effective simulation of a black hole and its visual phenomena using raycasting techniques in a 3D-like environment.
