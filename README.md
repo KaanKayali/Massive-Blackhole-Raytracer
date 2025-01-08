@@ -1,9 +1,10 @@
 # Massive-Blackhole-Raytracer
 
 ## Blackholes in space
-Black holes typically form from the remnants of massive stars. When a star exhausts its nuclear fuel, its core can no longer support the gravitational force, causing it to collapse. If the core's mass is sufficient, this collapse continues indefinitely, forming a singularity—a point of infinite density—at the black hole's center.
+Black holes typically form from the remnants of massive stars. When a star exhausts its nuclear fuel, its core can no longer support the gravitational force, causing it to collapse. If the core's mass is sufficient, this collapse continues indefinitely, forming a singularity—a point of infinite density—at the black hole's center. <br>
 
-Image. Image.
+<img src="https://rantonels.github.io/starless/pics/hm_out_small.jpg" alt="Raytraced blackhole" height="250"> <img src="./Images/screenshot1.png" alt="Screenshot of my program with raycasted blackhole" height="250"><br>
+<i>Source: <a href="https://rantonels.github.io/starless/">rantonels.github.io/starless</a></i><br>
 
 ## Structure of a Black Hole
 Singularity: The core of the black hole, where matter is compressed into an infinitely small space. The laws of physics as we know them break down here.
@@ -15,7 +16,9 @@ To an observer, black holes are invisible because light cannot escape them. Howe
 
 When light passes near a black hole, it doesn’t travel in a straight line due to the intense gravitational field created by the black hole's immense mass. According to Einstein's general relativity, gravity warps spacetime itself. This means that light, which normally travels in straight lines, follows curved paths around the black hole. This bending of light is called gravitational lensing.
 
-Image.
+<img src="https://vigoroushandwaving.wordpress.com/wp-content/uploads/2014/05/light_deflection.png" alt="rays near a blackhole in 2D" height="350">
+<i>Source: <a href="https://vigoroushandwaving.wordpress.com/2014/05/22/photon-spheres/">vigoroushandwaving.wordpress.com/2014/05/22/photon-spheres</a></i><br><br>
+
 
 The disk around the black hole appears bent because the black hole's gravity is so strong that it bends the paths of light traveling near it. This bending allows us to see parts of the disk that would normally be hidden, like the far side and bottom. Light from behind the black hole curves around to reach the observer, making the disk look like a glowing ring that wraps around the black hole. This distortion is caused by the warping of space around the black hole, a phenomenon called gravitational lensing.
 
@@ -46,7 +49,7 @@ Once all rays are traced, the colors they return are mapped to a 2D image, repre
 - A dark central shadow (the event horizon).
 - A glowing ring around it (the accretion disk), warped by gravitational lensing.
 
-Image.
+<img src="./Images/raycasting1.gif" alt="Screenshot of my program with raycasted blackhole" height="250">
 
 ## Code in GameMaker
 
@@ -125,6 +128,15 @@ This script renders the scene onto the screen, displaying the black hole, accret
 4. **Rendering:**
    - The processed ray data (`raycastsToDraw`) is used to draw the final image on the screen.
 
+**Front view:** <br>
+<img src="./Images/screenshot.png" alt="Screenshot of my program with raycasted blackhole" height="250"><br><br>
+
+**Top view (Lower position of the blackhole):** <br>
+<img src="./Images/screenshot2.png" alt="Screenshot of my program with raycasted blackhole" height="250"><br>
+
+**Bottom view (Higher position of the blackhole):** <br>
+<img src="./Images/screenshot3.png" alt="Screenshot of my program with raycasted blackhole" height="250">
+
 ---
 
-This implementation provides a simplified but effective simulation of a black hole and its visual phenomena using raycasting techniques in a 3D-like environment.
+This implementation provides a simplified but effective simulation of a black hole and its visual phenomena using raycasting techniques in a 3D-like environment.height=<br><br>
