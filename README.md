@@ -139,4 +139,4 @@ This script renders the scene onto the screen, displaying the black hole, accret
 
 ---
 
-This implementation provides a simplified but effective simulation of a black hole and its visual phenomena using raycasting techniques in a 3D-like environment.height=<br><br>
+This implementation provides a simplified but effective simulation of a black hole and its visual phenomena using raycasting techniques in a 3D-like environment.
