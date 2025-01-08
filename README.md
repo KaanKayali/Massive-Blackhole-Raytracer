@@ -86,17 +86,55 @@ This script computes how the rays interact with the black hole and its accretion
 
     The force components (`fx`, `fy`, `fz`) alter the ray's direction.
 
+```gml
+//Movement of rays
+dx = blackholepos[0] - raycasts[i].xpos;
+dy = blackholepos[1] - raycasts[i].ypos;
+dz = blackholepos[2] - raycasts[i].zpos;
+
+var disToBlackhole = sqrt(power(dx, 2) + power(dy, 2) + power(dz, 2));
+var force = grav / disToBlackhole;
+
+var fx = force * dx / disToBlackhole;
+var fy = force * dy / disToBlackhole;
+var fz = force * dz / disToBlackhole;
+
+```
+
 - **Collision Detection:**
   - Rays are checked for:
     1. **Collision with the black hole** (inside the event horizon).
     2. **Collision with the accretion disk** (within its boundaries).
     3. **Exceeding a predefined limit in the scene.**
+   
+```gml
+//Collision with blackhole
+if(disToBlackhole <= blackholeradius){
+ insideBlackhole = true;
+}
+  	
+//Collision with disc
+if(disToBlackhole <= discOuterRadius && disToBlackhole >= discInnerRadius && raycasts[i].ypos > blackholepos[1] - discHeight/2 && raycasts[i].ypos < blackholepos[1] + discHeight/2){
+ insideDisc = true;
+}
+    
+```
 
 - **Color Assignment:**
   - Rays hitting:
     - **Black Hole:** Assigned `blackholeColor` (pure black).
     - **Accretion Disk:** Assigned `innerDiscColor` or `outerDiscColor` depending on proximity to the disk's edge.
   - The `raycastsToDraw` array records the position and color of rays that are ready to be rendered.
+ 
+```gml
+//Set color
+if(insideDisc || insideBlackhole || raycasts[i].zpos >= distanceLimitOfRays){
+ //Set color & position on Screen
+ var drawcolor = -1;
+ if(insideDisc) drawcolor = (disToBlackhole >= discOuterRadius - outerDiscLength) ? outerDiscColor : innerDiscColor;
+ if(insideBlackhole) drawcolor = blackholeColor;
+}
+```
 
 - **Ray Movement:**
   - Rays that haven't finished their journey continue moving based on their normalized direction vectors.
@@ -108,13 +146,45 @@ This script renders the scene onto the screen, displaying the black hole, accret
 
 #### Key Components:
 - **Drawing Stars:**
-  - Stars are drawn as points using the `starColor`.
+  - Stars are drawn as points using the `draw_point` function.
+
+```gml
+//Draw stars
+for(var i = 0; i < array_length(stars); i++){
+	draw_set_color(starColor);
+	draw_point(stars[i].xpos, stars[i].ypos);
+}
+
+```
 
 - **Rendering Rays:**
   - Each completed ray in `raycastsToDraw` is rendered as a pixel (or block) on the screen, with the color determined by where it landed (black hole, accretion disk, or background).
+ 
+```gml
+//Draw raycast
+for(var i = 0; i < array_length(raycastsToDraw); i++){
+	draw_set_color(raycastsToDraw[i].pixelcolor);
+	draw_rectangle(
+		raycastsToDraw[i].xposOnScr * blockwidth,
+		raycastsToDraw[i].yposOnScr * blockheight,
+		raycastsToDraw[i].xposOnScr * blockwidth + blockwidth,
+		raycastsToDraw[i].yposOnScr * blockheight + blockheight,
+		false
+	);
+}
+
+```
 
 - **Surface for Optimization:**
   - A drawing surface is used to efficiently render the simulation frame by frame.
+ 
+```gml
+//Surface
+if (!surface_exists(drawSurface)) drawSurface = surface_create(windowWidth, windowHeight);
+surface_set_target(drawSurface);
+draw_clear(bgColor);
+
+```
 
 ---
 
