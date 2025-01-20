@@ -208,5 +208,31 @@ draw_clear(bgColor);
 <img src="./Images/screenshot3.png" alt="Screenshot of my program with raycasted blackhole" height="250">
 
 ---
+### **Glowing effect:**
+Adding a glow to the disc of a black hole enhances its realism.
+```gml
+//Surface
+shaderSurface = -1;
+shaderMultiply = 10;
+```
+
+```gml
+//Draw shader
+if (!surface_exists(shaderSurface)) shaderSurface = surface_create(windowWidth/shaderMultiply, windowHeight/shaderMultiply);
+var interpol = gpu_get_texfilter();
+gpu_set_texfilter(true);
+surface_set_target(shaderSurface);
+draw_surface_stretched(application_surface, 0, 0, windowWidth/shaderMultiply, windowHeight/shaderMultiply);
+surface_reset_target();
+gpu_set_blendmode(bm_add);
+draw_surface_stretched(shaderSurface, 0, 0, windowWidth, windowHeight);
+gpu_set_texfilter(interpol);
+gpu_set_blendmode(bm_normal);
+
+```
+<img src="./Images/screenshot4.png" alt="Screenshot of my program with raycasted glowing blackhole" height="300">
+<i>Source code by <a href="https://forum.gamemaker.io/index.php?threads/about-post-processing.99957/">Nocturne's reply</a></i><br>
+
+---
 
 This implementation provides a simplified but effective simulation of a black hole and its visual phenomena using raycasting techniques in a 3D-like environment.
