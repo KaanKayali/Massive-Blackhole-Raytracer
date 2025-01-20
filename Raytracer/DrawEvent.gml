@@ -26,5 +26,18 @@ for(var i = 0; i < array_length(raycastsToDraw); i++){
 surface_reset_target();
 draw_surface(drawSurface, 0, 0);
 
+//Draw shader
+if (!surface_exists(shaderSurface)) shaderSurface = surface_create(windowWidth/shaderMultiply, windowHeight/shaderMultiply);
+var interpol = gpu_get_texfilter();
+gpu_set_texfilter(true);
+surface_set_target(shaderSurface);
+draw_surface_stretched(application_surface, 0, 0, windowWidth/shaderMultiply, windowHeight/shaderMultiply);
+surface_reset_target();
+gpu_set_blendmode(bm_add);
+draw_surface_stretched(shaderSurface, 0, 0, windowWidth, windowHeight);
+gpu_set_texfilter(interpol);
+gpu_set_blendmode(bm_normal);
+
+
 
 
