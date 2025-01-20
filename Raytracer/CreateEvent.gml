@@ -75,4 +75,7 @@ repeat(staramount){
 
 //Surface
 drawSurface = -1;
+shaderSurface = -1;
+shaderMultiply = 10;
+
 
